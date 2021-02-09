@@ -1,25 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+
+import Header from './components/Navigation/Navigation';
+
+import theme from './utils/theme';
+
+const GlobalStyles = createGlobalStyle`
+  body { 
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat";
+    background: ${({ theme }) => theme.colors.background};
+  }
+  
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  `;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px 10px;
+  height: 100vh;
+  color: ${({ theme }) => theme.colors.fontPrimary};
+
+  ${({ theme }) => theme.media.tablet} {
+    padding: 20px 30px;
+  }
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <Wrapper>
+        <Header>Weather</Header>
+      </Wrapper>
+    </ThemeProvider>
   );
 }
 
