@@ -1,18 +1,19 @@
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 import Header from './components/Navigation/Navigation';
+import SearchBar from './components/SearchBar/SearchBar';
 
 import theme from './utils/theme';
 
 const GlobalStyles = createGlobalStyle`
   body { 
-    margin: 0;
-    padding: 0;
-    font-family: "Montserrat";
     background: ${({ theme }) => theme.colors.background};
   }
   
   *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat";
     box-sizing: border-box;
   }
   `;
@@ -35,6 +36,7 @@ function App() {
       <GlobalStyles />
       <Wrapper>
         <Header>Weather</Header>
+        <SearchBar />
       </Wrapper>
     </ThemeProvider>
   );
