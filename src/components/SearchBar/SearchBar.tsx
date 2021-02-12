@@ -5,6 +5,7 @@ const Bar = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  margin: 20px 0;
   padding: 5px 20px;
   background: pink;
   border-radius: 15px;
@@ -15,7 +16,7 @@ const Bar = styled.div`
   }
 
   ${({ theme }) => theme.media.desktop} {
-    padding: 20px 80px;
+    padding: 10px 80px;
   }
 `;
 

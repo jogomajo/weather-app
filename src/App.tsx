@@ -2,6 +2,7 @@ import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 import Header from './components/Navigation/Navigation';
 import SearchBar from './components/SearchBar/SearchBar';
+import WeatherDetails from './components/WeatherDetails/WeatherDetails';
 
 import theme from './utils/theme';
 
@@ -28,6 +29,10 @@ const Wrapper = styled.div`
   ${({ theme }) => theme.media.tablet} {
     padding: 20px 30px;
   }
+
+  /* ${({ theme }) => theme.media.desktop} {
+    padding: 20px 150px;
+  } */
 `;
 
 function App() {
@@ -37,6 +42,7 @@ function App() {
       <Wrapper>
         <Header>Weather</Header>
         <SearchBar />
+        <WeatherDetails />
       </Wrapper>
     </ThemeProvider>
   );
