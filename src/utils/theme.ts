@@ -15,8 +15,8 @@ const theme = {
     lg: '2rem',
   },
   media: {
-    tablet: '@media (min-width: 420px)',
-    desktop: '@media (min-width: 768px)',
+    tablet: '@media (min-width: 500px)',
+    desktop: '@media (min-width: 900px)',
   },
   shadow: '2px 2px 2px rgba(0, 0, 0, 0.2)',
 };

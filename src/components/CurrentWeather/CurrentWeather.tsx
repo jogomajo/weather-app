@@ -5,19 +5,19 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 10px 0;
+  /* margin: 10px 0; */
   padding: 5px 20px;
   background: pink;
   border-radius: 15px;
   box-shadow: ${({ theme }) => theme.shadow};
   user-select: none;
 
-  ${({ theme }) => theme.media.tablet} {
+  /* ${({ theme }) => theme.media.tablet} {
     padding: 10px 40px;
-  }
+  } */
 
   ${({ theme }) => theme.media.desktop} {
-    padding: 10px 80px;
+    grid-row: 1/3;
   }
 `;
 

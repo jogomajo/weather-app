@@ -3,23 +3,19 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 10px 0;
+  /* margin: 10px 0; */
   background: pink;
   border-radius: 15px;
   box-shadow: ${({ theme }) => theme.shadow};
   user-select: none;
 
-  ${({ theme }) => theme.media.tablet} {
-    padding: 10px 40px;
-  }
-
-  ${({ theme }) => theme.media.desktop} {
-    padding: 10px 80px;
-  }
-
   div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1;
     padding: 10px 0;
-    text-align: center;
     transition: background-color 0.3s;
 
     p:first-child {
@@ -47,6 +43,15 @@ const Container = styled.div`
     &:nth-of-type(3):hover {
       background-color: #ccc;
       border-radius: 0 0 15px 15px;
+    }
+  }
+
+  ${({ theme }) => theme.media.desktop} {
+    flex-direction: row;
+
+    div:not(:last-child) {
+      border-bottom: none;
+      border-right: 1px solid #999;
     }
   }
 `;

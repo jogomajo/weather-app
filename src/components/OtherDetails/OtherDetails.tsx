@@ -2,14 +2,36 @@ import styled from 'styled-components';
 import { Sunny, Moon } from '@styled-icons/ionicons-solid';
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, auto);
+  grid-template-areas:
+    'day day'
+    'air air'
+    'temp temp';
+  margin-bottom: 50px;
   background: pink;
   border-radius: 15px;
   box-shadow: ${({ theme }) => theme.shadow};
+
+  ${({ theme }) => theme.media.tablet} {
+    grid-column: 1/3;
+    margin-bottom: 0;
+
+    grid-template-rows: repeat(2, auto);
+    grid-template-areas:
+      'day day'
+      'air temp';
+  }
+
+  ${({ theme }) => theme.media.desktop} {
+    grid-column: 2/3;
+  }
 `;
 
 const DayDetails = styled.div`
+  grid-area: day;
+
   display: flex;
   flex-wrap: wrap;
 
@@ -27,6 +49,10 @@ const DayDetails = styled.div`
 
     ${({ theme }) => theme.media.tablet} {
       flex-basis: 25%;
+
+      &:nth-child(2) {
+        border-right: 1px solid #999;
+      }
     }
   }
 `;
@@ -40,8 +66,8 @@ const MoonIcon = styled(Moon)`
 `;
 
 const AirDetails = styled.div`
-  margin: 10px 0;
-  padding: 5px 20px;
+  grid-area: air;
+  padding: 20px;
   border-bottom: 1px solid #999;
 
   & > p {
@@ -84,11 +110,16 @@ const AirDetails = styled.div`
       }
     }
   }
+
+  ${({ theme }) => theme.media.tablet} {
+    border-right: 1px solid #999;
+    border-bottom: none;
+  }
 `;
 
 const TemperatureDetails = styled.div`
-  margin: 10px 0;
-  padding: 5px 20px;
+  grid-area: temp;
+  padding: 20px;
   font-weight: 500;
   list-style-type: none;
 
