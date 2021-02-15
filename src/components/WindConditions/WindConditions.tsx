@@ -3,8 +3,7 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  /* margin: 10px 0; */
-  background: pink;
+  background: ${({ theme }) => theme.colors.tilesBackground};
   border-radius: 15px;
   box-shadow: ${({ theme }) => theme.shadow};
   user-select: none;
@@ -16,7 +15,23 @@ const Container = styled.div`
     flex-direction: column;
     flex-grow: 1;
     padding: 10px 0;
-    transition: background-color 0.3s;
+    transition: background 0.3s;
+
+    &:first-child {
+      border-radius: 15px 15px 0 0;
+    }
+
+    &:last-child {
+      border-radius: 0 0 15px 15px;
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #999;
+    }
+
+    &:hover {
+      background: #ccc;
+    }
 
     p:first-child {
       margin-bottom: 5px;
@@ -24,25 +39,8 @@ const Container = styled.div`
     }
 
     p:last-child {
-      font-weight: 500;
-    }
-
-    &:not(:last-child) {
-      border-bottom: 1px solid #999;
-    }
-
-    &:nth-of-type(1):hover {
-      background-color: #ccc;
-      border-radius: 15px 15px 0 0;
-    }
-
-    &:nth-of-type(2):hover {
-      background-color: #ccc;
-    }
-
-    &:nth-of-type(3):hover {
-      background-color: #ccc;
-      border-radius: 0 0 15px 15px;
+      font-weight: 700;
+      color: ${({ theme }) => theme.colors.primary};
     }
   }
 
@@ -52,6 +50,20 @@ const Container = styled.div`
     div:not(:last-child) {
       border-bottom: none;
       border-right: 1px solid #999;
+    }
+
+    div:first-child {
+      border-radius: 15px 0 0 15px;
+    }
+
+    div:last-child {
+      border-radius: 0 15px 15px 0;
+    }
+  }
+
+  ${({ theme }) => theme.media.hd} {
+    p {
+      font-size: 2rem;
     }
   }
 `;

@@ -1,8 +1,9 @@
 const theme = {
   colors: {
-    fontPrimary: '#000000',
-    fontSecondary: '#454545',
-    background: '#F1FFFA',
+    primary: '#9d0208ff',
+    secondary: '#FFD770',
+    background: '#FFE8AD',
+    tilesBackground: '#FDFBFB',
   },
   fontWeights: {
     thin: 300,
@@ -17,8 +18,20 @@ const theme = {
   media: {
     tablet: '@media (min-width: 500px)',
     desktop: '@media (min-width: 900px)',
+    hd: `@media (min-width: 1600px)`,
   },
   shadow: '2px 2px 2px rgba(0, 0, 0, 0.2)',
 };
 
 export default theme;
+
+// --xiketic: #03071eff;
+// --dark-sienna: #370617ff;
+// --rosewood: #6a040fff;
+// --dark-red: #9d0208ff;
+// --rosso-corsa: #d00000ff;
+// --vermilion: #dc2f02ff;
+// --persimmon: #e85d04ff;
+// --carrot-orange: #f48c06ff;
+// --orange-web: #faa307ff;
+// --selective-yellow: #ffba08ff;

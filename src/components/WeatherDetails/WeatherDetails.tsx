@@ -17,6 +17,12 @@ const Grid = styled.div`
     grid-template-columns: 2fr 3fr;
     grid-template-rows: auto auto;
   }
+
+  ${({ theme }) => theme.media.hd} {
+    grid-template-columns: 30% 70%;
+    grid-template-rows: auto auto;
+    gap: 30px;
+  }
 `;
 
 const WeatherDetails = () => {

@@ -8,6 +8,7 @@ import theme from './utils/theme';
 
 const GlobalStyles = createGlobalStyle`
   body { 
+    height: 100vh;
     background: ${({ theme }) => theme.colors.background};
   }
   
@@ -16,6 +17,7 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     font-family: "Montserrat";
     box-sizing: border-box;
+    user-select: none;
   }
   `;
 
@@ -23,16 +25,14 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px 10px;
-  height: 100vh;
-  color: ${({ theme }) => theme.colors.fontPrimary};
 
   ${({ theme }) => theme.media.tablet} {
     padding: 20px 30px;
   }
 
-  /* ${({ theme }) => theme.media.desktop} {
+  ${({ theme }) => theme.media.hd} {
     padding: 20px 150px;
-  } */
+  }
 `;
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <Wrapper>
-        <Header>Weather</Header>
+        <Header>Weather App</Header>
         <SearchBar />
         <WeatherDetails />
       </Wrapper>

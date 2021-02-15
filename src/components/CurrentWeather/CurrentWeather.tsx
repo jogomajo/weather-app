@@ -5,19 +5,18 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  /* margin: 10px 0; */
-  padding: 5px 20px;
-  background: pink;
+  padding: 20px;
+  background: ${({ theme }) => theme.colors.tilesBackground};
   border-radius: 15px;
   box-shadow: ${({ theme }) => theme.shadow};
   user-select: none;
 
-  /* ${({ theme }) => theme.media.tablet} {
-    padding: 10px 40px;
-  } */
-
   ${({ theme }) => theme.media.desktop} {
     grid-row: 1/3;
+  }
+
+  ${({ theme }) => theme.media.hd} {
+    padding: 40px;
   }
 `;
 
@@ -25,12 +24,22 @@ const Title = styled.p`
   align-self: flex-start;
   font-size: 1.3rem;
   font-weight: 700;
+
+  ${({ theme }) => theme.media.hd} {
+    font-size: 2.4rem;
+  }
 `;
 
 const Temperature = styled.p`
-  margin: 20px 0;
+  margin: 40px 0;
   font-size: 3rem;
   font-weight: 700;
+  color: ${({ theme }) => theme.colors.primary};
+
+  ${({ theme }) => theme.media.hd} {
+    margin: 70px 0;
+    font-size: 4rem;
+  }
 `;
 
 const Sky = styled.div`
@@ -39,8 +48,13 @@ const Sky = styled.div`
   align-items: center;
   width: 100%;
   padding: 5px 10px;
-  background-color: ${({ theme }) => theme.colors.fontSecondary};
+  background-color: ${({ theme }) => theme.colors.primary};
   border-radius: 15px;
+
+  ${({ theme }) => theme.media.hd} {
+    margin: 15px 0;
+    padding: 10px 20px;
+  }
 `;
 
 const Icon = styled(Rainy)`
@@ -50,11 +64,19 @@ const Icon = styled(Rainy)`
   ${({ theme }) => theme.media.tablet} {
     height: 50px;
   }
+
+  ${({ theme }) => theme.media.hd} {
+    height: 70px;
+  }
 `;
 
 const IconDescription = styled.p`
   color: white;
   font-weight: 500;
+
+  ${({ theme }) => theme.media.hd} {
+    font-size: 2rem;
+  }
 `;
 
 const OtherConditions = styled.ul`
@@ -68,6 +90,14 @@ const OtherConditions = styled.ul`
     justify-content: space-between;
     margin-bottom: 10px;
     border-bottom: 1px solid black;
+  }
+
+  ${({ theme }) => theme.media.hd} {
+    font-size: 1.6rem;
+
+    li {
+      margin-bottom: 20px;
+    }
   }
 `;
 
