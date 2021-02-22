@@ -68,20 +68,28 @@ const Container = styled.div`
   }
 `;
 
-const WindConditions = () => {
+interface WindConditionsProps {
+  wind: {
+    speed: number;
+    direction: string;
+    degree: number;
+  };
+}
+
+const WindConditions: React.FC<WindConditionsProps> = ({ wind: { speed, direction, degree } }) => {
   return (
     <Container>
       <div>
         <p>Wind Speed</p>
-        <p>28 km/h</p>
+        <p>{speed} km/h</p>
       </div>
       <div>
         <p>Wind Direction</p>
-        <p>NW</p>
+        <p>{direction}</p>
       </div>
       <div>
         <p>Wind Degree</p>
-        <p>310</p>
+        <p>{degree}</p>
       </div>
     </Container>
   );

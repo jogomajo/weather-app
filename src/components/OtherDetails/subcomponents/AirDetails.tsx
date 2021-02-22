@@ -3,10 +3,6 @@ import styled from 'styled-components';
 const Container = styled.div`
   grid-area: air;
 
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center; */
-
   padding: 20px;
   border-bottom: 1px solid #999;
 
@@ -97,33 +93,52 @@ const Container = styled.div`
   }
 `;
 
-const AirDetails = () => {
+interface AirDetailsProps {
+  air: {
+    index: number;
+    pm2_5: number;
+    pm10: number;
+    no2: number;
+    so2: number;
+    o3: number;
+  };
+}
+
+const determineAirQuality = (index: number) => {
+  const levels = ['Good', 'Fair', 'Moderate', 'Poor', 'Very Poor'];
+
+  return levels[index - 1];
+};
+
+const AirDetails: React.FC<AirDetailsProps> = (props) => {
+  const { index, pm2_5, pm10, no2, so2, o3 } = props.air;
+
   return (
     <Container>
       <p>Air Quality Index (AQI)</p>
       <div>
-        <p>5</p>
-        <p>Good</p>
+        <p>{index}</p>
+        <p>{determineAirQuality(index)}</p>
       </div>
       <ul>
         <li>
-          <p>4</p>
+          <p>{pm2_5}</p>
           <p>pm2.5</p>
         </li>
         <li>
-          <p>5</p>
+          <p>{pm10}</p>
           <p>pm10</p>
         </li>
         <li>
-          <p>5</p>
+          <p>{no2}</p>
           <p>NO2</p>
         </li>
         <li>
-          <p>5</p>
+          <p>{so2}</p>
           <p>SO2</p>
         </li>
         <li>
-          <p>70</p>
+          <p>{o3}</p>
           <p>03</p>
         </li>
       </ul>

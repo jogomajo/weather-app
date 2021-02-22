@@ -32,12 +32,28 @@ const Container = styled.div`
   }
 `;
 
-const OtherDetails = () => {
+interface OtherDetailsProps {
+  air: {
+    index: number;
+    pm2_5: number;
+    pm10: number;
+    no2: number;
+    so2: number;
+    o3: number;
+  };
+  temperatureInfo: {
+    min: number;
+    max: number;
+    avg: number;
+  };
+}
+
+const OtherDetails: React.FC<OtherDetailsProps> = ({ air, temperatureInfo }) => {
   return (
     <Container>
       <DayDetails />
-      <AirDetails />
-      <TemperatureDetails />
+      <AirDetails air={air} />
+      <TemperatureDetails temperatureInfo={temperatureInfo} />
     </Container>
   );
 };

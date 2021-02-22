@@ -27,14 +27,32 @@ const Grid = styled.div`
 
 interface WeatherDetailsProps {
   weather: any;
+  air: {
+    index: number;
+    pm2_5: number;
+    pm10: number;
+    no2: number;
+    so2: number;
+    o3: number;
+  };
+  wind: {
+    speed: number;
+    direction: string;
+    degree: number;
+  };
+  temperatureInfo: {
+    min: number;
+    max: number;
+    avg: number;
+  };
 }
 
-const WeatherDetails: React.FC<WeatherDetailsProps> = ({ weather }) => {
+const WeatherDetails: React.FC<WeatherDetailsProps> = ({ weather, air, wind, temperatureInfo }) => {
   return (
     <Grid>
       <CurrentWeather weather={weather} />
-      <WindConditions />
-      <OtherDetails />
+      <WindConditions wind={wind} />
+      <OtherDetails air={air} temperatureInfo={temperatureInfo} />
     </Grid>
   );
 };

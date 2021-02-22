@@ -103,36 +103,42 @@ const OtherConditions = styled.ul`
 
 interface CurrentWeatherProps {
   weather: {
-    main: any;
-    weather: any;
+    temp: number;
+    description: string;
+    realFeel: number;
+    humidity: number;
+    pressure: number;
+    uvIndex: number;
   };
 }
 
-const CurrentWeather: React.FC<CurrentWeatherProps> = ({ weather: { main, weather } }) => {
+const CurrentWeather: React.FC<CurrentWeatherProps> = (props) => {
+  const { temp, description, realFeel, humidity, pressure, uvIndex } = props.weather;
+
   return (
     <Container>
       <Title>Current Weather</Title>
-      <Temperature>{`${main.temp} *C`}</Temperature>
+      <Temperature>{temp}&#176;C</Temperature>
       <Sky>
         <Icon />
-        <IconDescription>{weather[0].description}</IconDescription>
+        <IconDescription>{description}</IconDescription>
       </Sky>
       <OtherConditions>
         <li>
           <p>RealFeel</p>
-          <p>{main.feels_like}</p>
+          <p>{`${realFeel}`}&#176;C</p>
         </li>
         <li>
           <p>Humidity</p>
-          <p>{main.humidity}</p>
+          <p>{`${humidity}%`}</p>
         </li>
         <li>
           <p>Pressure</p>
-          <p>{main.pressure}</p>
+          <p>{`${pressure} hPa`}</p>
         </li>
         <li>
           <p>UV-Index</p>
-          <p>1</p>
+          <p>{uvIndex}</p>
         </li>
       </OtherConditions>
     </Container>

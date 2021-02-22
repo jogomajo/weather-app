@@ -33,22 +33,32 @@ const Container = styled.div`
   }
 `;
 
-const TemperatureDetails = () => {
+interface TemperatureDetailsProps {
+  temperatureInfo: {
+    min: number;
+    max: number;
+    avg: number;
+  };
+}
+
+const TemperatureDetails: React.FC<TemperatureDetailsProps> = ({
+  temperatureInfo: { min, max, avg },
+}) => {
   return (
     <Container>
       <p>Temperature-Info</p>
       <ul>
         <li>
           <p>Min Temp</p>
-          <p>-13</p>
+          <p>{min}</p>
         </li>
         <li>
           <p>Max Temp</p>
-          <p>-10</p>
+          <p>{max}</p>
         </li>
         <li>
           <p>Avg Temp</p>
-          <p>-11</p>
+          <p>{avg}</p>
         </li>
       </ul>
     </Container>
