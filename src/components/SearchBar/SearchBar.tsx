@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import styled from 'styled-components';
 import { Location } from '@styled-icons/ionicons-solid';
 
@@ -17,7 +18,7 @@ const Bar = styled.div`
 
   ${({ theme }) => theme.media.hd} {
     margin-top: 60px;
-    padding: 20px 20px;
+    padding: 20px;
   }
 `;
 
@@ -115,17 +116,31 @@ const Button = styled.button`
   }
 `;
 
-const SearchBar = () => {
+interface IProps {
+  setCityName: (name: string | null) => void;
+  city: string;
+  country: string;
+}
+
+const SearchBar: React.FC<IProps> = ({ setCityName, city, country }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const onClickHandler = () => {
+    if (inputRef && inputRef.current) {
+      setCityName(inputRef.current.value.toLowerCase().trim());
+    }
+  };
+
   return (
     <Bar>
       <CityNameWrapper>
         <Icon />
-        <CityName>Lublin</CityName>
-        <CountryName>/ Poland</CountryName>
+        <CityName>{city}</CityName>
+        <CountryName>/ {country}</CountryName>
       </CityNameWrapper>
       <InputWrapper>
-        <Input type="text" placeholder="search location..." size={10} />
-        <Button>search</Button>
+        <Input type="text" placeholder="search location..." size={10} ref={inputRef} />
+        <Button onClick={onClickHandler}>search</Button>
       </InputWrapper>
     </Bar>
   );

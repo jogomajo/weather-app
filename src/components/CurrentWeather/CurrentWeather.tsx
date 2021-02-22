@@ -26,7 +26,7 @@ const Title = styled.p`
   font-weight: 700;
 
   ${({ theme }) => theme.media.hd} {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
   }
 `;
 
@@ -101,27 +101,34 @@ const OtherConditions = styled.ul`
   }
 `;
 
-const CurrentWeather = () => {
+interface CurrentWeatherProps {
+  weather: {
+    main: any;
+    weather: any;
+  };
+}
+
+const CurrentWeather: React.FC<CurrentWeatherProps> = ({ weather: { main, weather } }) => {
   return (
     <Container>
       <Title>Current Weather</Title>
-      <Temperature>- 9 *C</Temperature>
+      <Temperature>{`${main.temp} *C`}</Temperature>
       <Sky>
         <Icon />
-        <IconDescription>Blowing snow</IconDescription>
+        <IconDescription>{weather[0].description}</IconDescription>
       </Sky>
       <OtherConditions>
         <li>
           <p>RealFeel</p>
-          <p>-18</p>
+          <p>{main.feels_like}</p>
         </li>
         <li>
           <p>Humidity</p>
-          <p>67</p>
+          <p>{main.humidity}</p>
         </li>
         <li>
           <p>Pressure</p>
-          <p>1024</p>
+          <p>{main.pressure}</p>
         </li>
         <li>
           <p>UV-Index</p>

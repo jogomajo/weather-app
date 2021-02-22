@@ -19,16 +19,20 @@ const Grid = styled.div`
   }
 
   ${({ theme }) => theme.media.hd} {
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 3fr 7fr;
     grid-template-rows: auto auto;
-    gap: 30px;
+    gap: 25px;
   }
 `;
 
-const WeatherDetails = () => {
+interface WeatherDetailsProps {
+  weather: any;
+}
+
+const WeatherDetails: React.FC<WeatherDetailsProps> = ({ weather }) => {
   return (
     <Grid>
-      <CurrentWeather />
+      <CurrentWeather weather={weather} />
       <WindConditions />
       <OtherDetails />
     </Grid>
