@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.js": "/github.io/weather-app/static/js/main.03e8c602.chunk.js",
-    "main.js.map": "/github.io/weather-app/static/js/main.03e8c602.chunk.js.map",
-    "runtime-main.js": "/github.io/weather-app/static/js/runtime-main.ca1bc452.js",
-    "runtime-main.js.map": "/github.io/weather-app/static/js/runtime-main.ca1bc452.js.map",
-    "static/js/2.cad450a9.chunk.js": "/github.io/weather-app/static/js/2.cad450a9.chunk.js",
-    "static/js/2.cad450a9.chunk.js.map": "/github.io/weather-app/static/js/2.cad450a9.chunk.js.map",
-    "index.html": "/github.io/weather-app/index.html",
-    "static/js/2.cad450a9.chunk.js.LICENSE.txt": "/github.io/weather-app/static/js/2.cad450a9.chunk.js.LICENSE.txt",
-    "static/media/Montserrat-Bold.079ca05d.ttf": "/github.io/weather-app/static/media/Montserrat-Bold.079ca05d.ttf",
-    "static/media/Montserrat-ExtraBold.1944c8d1.ttf": "/github.io/weather-app/static/media/Montserrat-ExtraBold.1944c8d1.ttf",
-    "static/media/Montserrat-Medium.e2d60bc4.ttf": "/github.io/weather-app/static/media/Montserrat-Medium.e2d60bc4.ttf",
-    "static/media/Montserrat-Regular.3cd78665.ttf": "/github.io/weather-app/static/media/Montserrat-Regular.3cd78665.ttf",
-    "static/media/Montserrat-SemiBold.fa8441f3.ttf": "/github.io/weather-app/static/media/Montserrat-SemiBold.fa8441f3.ttf",
-    "static/media/Righteous-Regular.fd011047.ttf": "/github.io/weather-app/static/media/Righteous-Regular.fd011047.ttf"
+    "main.js": "/weather-app/static/js/main.33d157cf.chunk.js",
+    "main.js.map": "/weather-app/static/js/main.33d157cf.chunk.js.map",
+    "runtime-main.js": "/weather-app/static/js/runtime-main.47e49396.js",
+    "runtime-main.js.map": "/weather-app/static/js/runtime-main.47e49396.js.map",
+    "static/js/2.7e13a3bc.chunk.js": "/weather-app/static/js/2.7e13a3bc.chunk.js",
+    "static/js/2.7e13a3bc.chunk.js.map": "/weather-app/static/js/2.7e13a3bc.chunk.js.map",
+    "index.html": "/weather-app/index.html",
+    "static/js/2.7e13a3bc.chunk.js.LICENSE.txt": "/weather-app/static/js/2.7e13a3bc.chunk.js.LICENSE.txt",
+    "static/media/Montserrat-Bold.079ca05d.ttf": "/weather-app/static/media/Montserrat-Bold.079ca05d.ttf",
+    "static/media/Montserrat-ExtraBold.1944c8d1.ttf": "/weather-app/static/media/Montserrat-ExtraBold.1944c8d1.ttf",
+    "static/media/Montserrat-Medium.e2d60bc4.ttf": "/weather-app/static/media/Montserrat-Medium.e2d60bc4.ttf",
+    "static/media/Montserrat-Regular.3cd78665.ttf": "/weather-app/static/media/Montserrat-Regular.3cd78665.ttf",
+    "static/media/Montserrat-SemiBold.fa8441f3.ttf": "/weather-app/static/media/Montserrat-SemiBold.fa8441f3.ttf",
+    "static/media/Righteous-Regular.fd011047.ttf": "/weather-app/static/media/Righteous-Regular.fd011047.ttf"
   },
   "entrypoints": [
-    "static/js/runtime-main.ca1bc452.js",
-    "static/js/2.cad450a9.chunk.js",
-    "static/js/main.03e8c602.chunk.js"
+    "static/js/runtime-main.47e49396.js",
+    "static/js/2.7e13a3bc.chunk.js",
+    "static/js/main.33d157cf.chunk.js"
   ]
 }
