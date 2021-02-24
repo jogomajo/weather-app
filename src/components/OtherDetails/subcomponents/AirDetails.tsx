@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { IAir } from '../../../interfaces';
+
 const Container = styled.div`
   grid-area: air;
 
@@ -94,24 +96,17 @@ const Container = styled.div`
 `;
 
 interface AirDetailsProps {
-  air: {
-    index: number;
-    pm2_5: number;
-    pm10: number;
-    no2: number;
-    so2: number;
-    o3: number;
-  };
+  air: IAir;
 }
-
-const determineAirQuality = (index: number) => {
-  const levels = ['Good', 'Fair', 'Moderate', 'Poor', 'Very Poor'];
-
-  return levels[index - 1];
-};
 
 const AirDetails: React.FC<AirDetailsProps> = (props) => {
   const { index, pm2_5, pm10, no2, so2, o3 } = props.air;
+
+  const determineAirQuality = (index: number) => {
+    const levels = ['Good', 'Fair', 'Moderate', 'Poor', 'Very Poor'];
+
+    return levels[index - 1];
+  };
 
   return (
     <Container>

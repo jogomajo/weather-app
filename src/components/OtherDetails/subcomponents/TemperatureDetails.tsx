@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { ITemperatureInfo } from '../../../interfaces';
+
 const Container = styled.div`
   grid-area: temp;
   padding: 20px;
@@ -34,11 +36,7 @@ const Container = styled.div`
 `;
 
 interface TemperatureDetailsProps {
-  temperatureInfo: {
-    min: number;
-    max: number;
-    avg: number;
-  };
+  temperatureInfo: ITemperatureInfo;
 }
 
 const TemperatureDetails: React.FC<TemperatureDetailsProps> = ({

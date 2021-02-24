@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { Sunny, Moon } from '@styled-icons/ionicons-solid';
 
+import { IAstronomicalData } from '../../../interfaces';
+
 const Container = styled.div`
   grid-area: day;
 
@@ -90,28 +92,32 @@ const MoonIcon = styled(Moon)`
   }
 `;
 
-const DayDetails = () => {
+interface DayDetailsProps {
+  day: IAstronomicalData;
+}
+
+const DayDetails: React.FC<DayDetailsProps> = ({ day: { sunrise, sunset, moonrise, moonset } }) => {
   return (
     <Container>
       <div>
         <SunIcon />
         <p>Sunrise Time</p>
-        <p>06:50 AM</p>
+        <p>{sunrise}</p>
       </div>
       <div>
         <SunIcon />
         <p>Sunset Time</p>
-        <p>04:38 PM</p>
+        <p>{sunset}</p>
       </div>
       <div>
         <MoonIcon />
         <p>Moonrise Time</p>
-        <p>07:13 AM</p>
+        <p>{moonrise}</p>
       </div>
       <div>
         <MoonIcon />
         <p>Moonset Time</p>
-        <p>04:01 PM</p>
+        <p>{moonset}</p>
       </div>
     </Container>
   );

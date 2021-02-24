@@ -4,6 +4,14 @@ import CurrentWeather from '../CurrentWeather/CurrentWeather';
 import OtherDetails from '../OtherDetails/OtherDetails';
 import WindConditions from '../WindConditions/WindConditions';
 
+import {
+  ICurrentWeather,
+  IAir,
+  IWind,
+  ITemperatureInfo,
+  IAstronomicalData,
+} from '../../interfaces';
+
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
@@ -26,33 +34,25 @@ const Grid = styled.div`
 `;
 
 interface WeatherDetailsProps {
-  weather: any;
-  air: {
-    index: number;
-    pm2_5: number;
-    pm10: number;
-    no2: number;
-    so2: number;
-    o3: number;
-  };
-  wind: {
-    speed: number;
-    direction: string;
-    degree: number;
-  };
-  temperatureInfo: {
-    min: number;
-    max: number;
-    avg: number;
-  };
+  weather: ICurrentWeather;
+  air: IAir;
+  wind: IWind;
+  temperatureInfo: ITemperatureInfo;
+  day: IAstronomicalData;
 }
 
-const WeatherDetails: React.FC<WeatherDetailsProps> = ({ weather, air, wind, temperatureInfo }) => {
+const WeatherDetails: React.FC<WeatherDetailsProps> = ({
+  weather,
+  air,
+  wind,
+  temperatureInfo,
+  day,
+}) => {
   return (
     <Grid>
       <CurrentWeather weather={weather} />
       <WindConditions wind={wind} />
-      <OtherDetails air={air} temperatureInfo={temperatureInfo} />
+      <OtherDetails air={air} temperatureInfo={temperatureInfo} day={day} />
     </Grid>
   );
 };

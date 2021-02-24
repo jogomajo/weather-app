@@ -75,6 +75,7 @@ const InputWrapper = styled.div`
 
   ${({ theme }) => theme.media.desktop} {
     height: 55px;
+    margin-left: 20px;
   }
 
   ${({ theme }) => theme.media.hd} {
@@ -126,8 +127,9 @@ const SearchBar: React.FC<IProps> = ({ setCityName, city, country }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const onClickHandler = () => {
-    if (inputRef && inputRef.current) {
+    if (inputRef?.current) {
       setCityName(inputRef.current.value.toLowerCase().trim());
+      inputRef.current.value = '';
     }
   };
 

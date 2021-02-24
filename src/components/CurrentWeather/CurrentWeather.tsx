@@ -1,5 +1,14 @@
 import styled from 'styled-components';
-import { Rainy } from '@styled-icons/ionicons-solid';
+import {
+  Rainy,
+  Cloud,
+  Sunny,
+  Thunderstorm,
+  Snow,
+  ReorderThree,
+} from '@styled-icons/ionicons-solid';
+
+import { ICurrentWeather } from '../../interfaces';
 
 const Container = styled.div`
   display: flex;
@@ -36,9 +45,17 @@ const Temperature = styled.p`
   font-weight: 700;
   color: ${({ theme }) => theme.colors.primary};
 
+  span {
+    font-size: 2rem;
+  }
+
   ${({ theme }) => theme.media.hd} {
     margin: 70px 0;
     font-size: 4rem;
+
+    span {
+      font-size: 3rem;
+    }
   }
 `;
 
@@ -57,16 +74,19 @@ const Sky = styled.div`
   }
 `;
 
-const Icon = styled(Rainy)`
+const Icon = styled.div`
   color: white;
   height: 40px;
+  width: 40px;
 
   ${({ theme }) => theme.media.tablet} {
     height: 50px;
+    width: 50px;
   }
 
   ${({ theme }) => theme.media.hd} {
     height: 70px;
+    width: 70px;
   }
 `;
 
@@ -102,25 +122,30 @@ const OtherConditions = styled.ul`
 `;
 
 interface CurrentWeatherProps {
-  weather: {
-    temp: number;
-    description: string;
-    realFeel: number;
-    humidity: number;
-    pressure: number;
-    uvIndex: number;
-  };
+  weather: ICurrentWeather;
 }
 
 const CurrentWeather: React.FC<CurrentWeatherProps> = (props) => {
-  const { temp, description, realFeel, humidity, pressure, uvIndex } = props.weather;
+  const { temp, weatherIcon, description, realFeel, humidity, pressure, uvIndex } = props.weather;
+
+  const chooseWeatherIcon = (icon: string) => {
+    if (icon === 'Clear') return <Sunny />;
+    if (icon === 'Clouds') return <Cloud />;
+    if (icon === 'Snow') return <Snow />;
+    if (icon === 'Rain' || icon === 'Drizzle') return <Rainy />;
+    if (icon === 'Thunderstorm') return <Thunderstorm />;
+    if (icon === 'Mist' || icon === 'Fog') return <ReorderThree />;
+  };
 
   return (
     <Container>
       <Title>Current Weather</Title>
-      <Temperature>{temp}&#176;C</Temperature>
+      <Temperature>
+        {temp}
+        <span>&#176;C</span>
+      </Temperature>
       <Sky>
-        <Icon />
+        <Icon>{chooseWeatherIcon(weatherIcon)}</Icon>
         <IconDescription>{description}</IconDescription>
       </Sky>
       <OtherConditions>

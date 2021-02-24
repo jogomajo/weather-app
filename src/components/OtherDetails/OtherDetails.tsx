@@ -4,6 +4,8 @@ import DayDetails from './subcomponents/DayDetails';
 import AirDetails from './subcomponents/AirDetails';
 import TemperatureDetails from './subcomponents/TemperatureDetails';
 
+import { IAir, ITemperatureInfo, IAstronomicalData } from '../../interfaces';
+
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -33,25 +35,15 @@ const Container = styled.div`
 `;
 
 interface OtherDetailsProps {
-  air: {
-    index: number;
-    pm2_5: number;
-    pm10: number;
-    no2: number;
-    so2: number;
-    o3: number;
-  };
-  temperatureInfo: {
-    min: number;
-    max: number;
-    avg: number;
-  };
+  air: IAir;
+  temperatureInfo: ITemperatureInfo;
+  day: IAstronomicalData;
 }
 
-const OtherDetails: React.FC<OtherDetailsProps> = ({ air, temperatureInfo }) => {
+const OtherDetails: React.FC<OtherDetailsProps> = ({ air, temperatureInfo, day }) => {
   return (
     <Container>
-      <DayDetails />
+      <DayDetails day={day} />
       <AirDetails air={air} />
       <TemperatureDetails temperatureInfo={temperatureInfo} />
     </Container>

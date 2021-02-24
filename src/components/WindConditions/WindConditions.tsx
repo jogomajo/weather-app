@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { IWind } from '../../interfaces';
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -69,11 +71,7 @@ const Container = styled.div`
 `;
 
 interface WindConditionsProps {
-  wind: {
-    speed: number;
-    direction: string;
-    degree: number;
-  };
+  wind: IWind;
 }
 
 const WindConditions: React.FC<WindConditionsProps> = ({ wind: { speed, direction, degree } }) => {
