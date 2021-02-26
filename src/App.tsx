@@ -42,6 +42,61 @@ const Wrapper = styled.div`
   }
 `;
 
+const Loading = styled.h1`
+  margin-top: 10vh;
+  text-align: center;
+
+  ::after {
+    content: '.';
+    animation: dots 1.5s steps(5, end) infinite;
+  }
+
+  @keyframes dots {
+    0%,
+    20% {
+      color: rgba(0, 0, 0, 0);
+      text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+    }
+    40% {
+      color: black;
+      text-shadow: 0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0);
+    }
+    60% {
+      text-shadow: 0.25em 0 0 black, 0.5em 0 0 rgba(0, 0, 0, 0);
+    }
+    80%,
+    100% {
+      text-shadow: 0.25em 0 0 black, 0.5em 0 0 black;
+    }
+  }
+`;
+
+const ErrorMessage = styled.div`
+  margin-top: 10vh;
+  text-align: center;
+
+  p:first-child {
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+
+  p:last-child {
+    font-size: 2rem;
+    margin-top: 20px;
+    font-weight: 700;
+  }
+
+  ${({ theme }) => theme.media.hd} {
+    p:first-child {
+      font-size: 2rem;
+    }
+
+    p:last-child {
+      font-size: 3rem;
+    }
+  }
+`;
+
 const App: React.FC = () => {
   const [searchedCityName, setSearchedCityName] = useState<string | null>('lublin');
   const [cityCoords, setCityCoords] = useState({
@@ -56,8 +111,9 @@ const App: React.FC = () => {
   const [temperatureInfo, setTemperatureInfo] = useState<ITemperatureInfo | undefined>();
   const [day, setDay] = useState<IAstronomicalData | undefined>();
 
-  const { data: weatherData, error } = useQuery(['weather', searchedCityName], () =>
-    fetchWeatherConditions(searchedCityName)
+  const { data: weatherData, error, isSuccess, isLoading } = useQuery(
+    ['weather', searchedCityName],
+    () => fetchWeatherConditions(searchedCityName)
   );
   const { data: airData, isSuccess: airFetchIsSuccess } = useQuery(['air', cityCoords], () =>
     fetchAirConditions(cityCoords)
@@ -85,6 +141,34 @@ const App: React.FC = () => {
     }
   }, [airData, astroData]);
 
+  const renderWeatherPanel = () => {
+    if (isLoading) {
+      return <Loading>Looking for the weather</Loading>;
+    }
+
+    if (isSuccess) {
+      return currentWeather && air && wind && temperatureInfo && day ? (
+        <WeatherDetails
+          weather={currentWeather}
+          air={air}
+          wind={wind}
+          temperatureInfo={temperatureInfo}
+          day={day}
+        />
+      ) : null;
+    }
+
+    if (error) {
+      console.log(error);
+      return (
+        <ErrorMessage>
+          <p>It seems that the given location doesn't exist...</p>
+          <p>Try again!</p>
+        </ErrorMessage>
+      );
+    }
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
@@ -98,15 +182,7 @@ const App: React.FC = () => {
             country={cityCoords.country}
           />
         ) : null}
-        {currentWeather && air && wind && temperatureInfo && day ? (
-          <WeatherDetails
-            weather={currentWeather}
-            air={air}
-            wind={wind}
-            temperatureInfo={temperatureInfo}
-            day={day}
-          />
-        ) : null}
+        {renderWeatherPanel()}
       </Wrapper>
     </ThemeProvider>
   );

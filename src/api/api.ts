@@ -25,7 +25,7 @@ const evaluateDirection = (degrees: number) => {
 };
 
 export const fetchWeatherConditions = async (city: string | null): Promise<IWeatherConditions> => {
-  const weatherURL = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WEATHER_KEY}&units=metric`;
+  const weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${WEATHER_KEY}&units=metric`;
 
   const fetchedData = await fetch(weatherURL);
   const weatherData = await fetchedData.json();
@@ -65,7 +65,7 @@ export const fetchWeatherConditions = async (city: string | null): Promise<IWeat
 export const fetchAirConditions = async (coords: { lon: number; lat: number }): Promise<IAir> => {
   const { lat, lon } = coords;
 
-  const airURL = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${WEATHER_KEY}`;
+  const airURL = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${WEATHER_KEY}`;
 
   const fetchedData = await fetch(airURL);
   const air = await fetchedData.json();

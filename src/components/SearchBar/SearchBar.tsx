@@ -13,7 +13,7 @@ const Bar = styled.div`
   box-shadow: ${({ theme }) => theme.shadow};
 
   ${({ theme }) => theme.media.tablet} {
-    padding: 10px 40px;
+    padding: 10px 20px;
   }
 
   ${({ theme }) => theme.media.hd} {
@@ -25,6 +25,10 @@ const Bar = styled.div`
 const CityNameWrapper = styled.div`
   display: flex;
   min-width: 300px;
+
+  ${({ theme }) => theme.media.tablet} {
+    margin-right: 20px;
+  }
 `;
 
 const Icon = styled(Location)`
@@ -124,7 +128,7 @@ interface IProps {
 }
 
 const SearchBar: React.FC<IProps> = ({ setCityName, city, country }) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const onClickHandler = () => {
     if (inputRef?.current) {
