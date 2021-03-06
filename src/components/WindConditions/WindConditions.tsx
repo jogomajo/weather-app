@@ -1,6 +1,8 @@
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { IWind } from '../../interfaces';
+import { AppState } from '../../store';
 
 const Container = styled.div`
   display: flex;
@@ -74,7 +76,9 @@ interface WindConditionsProps {
   wind: IWind;
 }
 
-const WindConditions: React.FC<WindConditionsProps> = ({ wind: { speed, direction, degree } }) => {
+const WindConditions: React.FC<WindConditionsProps> = (props) => {
+  const { speed, direction, degree } = props.wind;
+
   return (
     <Container>
       <div>
@@ -93,4 +97,12 @@ const WindConditions: React.FC<WindConditionsProps> = ({ wind: { speed, directio
   );
 };
 
-export default WindConditions;
+const mapStateToProps = (state: AppState) => {
+  const { speed, direction, degree } = state.wind;
+
+  return {
+    wind: { speed, direction, degree },
+  };
+};
+
+export default connect(mapStateToProps)(WindConditions);

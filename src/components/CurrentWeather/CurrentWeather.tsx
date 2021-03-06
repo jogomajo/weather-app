@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import {
   Rainy,
@@ -9,6 +10,7 @@ import {
 } from '@styled-icons/ionicons-solid';
 
 import { ICurrentWeather } from '../../interfaces';
+import { AppState } from '../../store';
 
 const Container = styled.div`
   display: flex;
@@ -126,7 +128,15 @@ interface CurrentWeatherProps {
 }
 
 const CurrentWeather: React.FC<CurrentWeatherProps> = (props) => {
-  const { temp, weatherIcon, description, realFeel, humidity, pressure, uvIndex } = props.weather;
+  const {
+    temp,
+    weatherIcon,
+    description,
+    realFeel,
+    humidity,
+    pressure,
+    uvIndex,
+  } = props.weather;
 
   const chooseWeatherIcon = (icon: string) => {
     if (icon === 'Clear') return <Sunny />;
@@ -170,4 +180,20 @@ const CurrentWeather: React.FC<CurrentWeatherProps> = (props) => {
   );
 };
 
-export default CurrentWeather;
+const mapStateToProps = (state: AppState) => {
+  const {
+    temp,
+    weatherIcon,
+    description,
+    realFeel,
+    humidity,
+    pressure,
+    uvIndex,
+  } = state.currentWeather;
+
+  return {
+    weather: { temp, weatherIcon, description, realFeel, humidity, pressure, uvIndex },
+  };
+};
+
+export default connect(mapStateToProps)(CurrentWeather);

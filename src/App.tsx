@@ -1,17 +1,41 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { useQuery } from 'react-query';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 import Header from './components/Header/Header';
 import SearchBar from './components/SearchBar/SearchBar';
-import WeatherDetails from './components/WeatherDetails/WeatherDetails';
-
-import { fetchWeatherConditions, fetchAirConditions, fetchAstronomicalData } from './api/api';
-
-import { ICurrentWeather, IWind, ITemperatureInfo, IAir, IAstronomicalData } from './interfaces';
+import CurrentWeather from './components/CurrentWeather/CurrentWeather';
+import WindConditions from './components/WindConditions/WindConditions';
+import OtherDetails from './components/OtherDetails/OtherDetails';
 
 import theme from './utils/theme';
 import GlobalFonts from './fonts/fonts';
+
+import { AppState } from './store';
+import {
+  setCityCoords,
+  setCurrentWeather,
+  setWind,
+  setAir,
+  setTemperatureInfo,
+  setAstronomicalData,
+} from './store/actions';
+
+import {
+  fetchWeatherConditions,
+  fetchAirConditions,
+  fetchAstronomicalData,
+} from './api/api';
+
+import {
+  ICurrentWeather,
+  IWind,
+  ITemperatureInfo,
+  IAir,
+  IAstronomicalData,
+  ICityCoords,
+} from './interfaces';
 
 const GlobalStyles = createGlobalStyle`
   body { 
@@ -71,6 +95,27 @@ const Loading = styled.h1`
   }
 `;
 
+const WeatherPanelGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+
+  ${({ theme }) => theme.media.tablet} {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  ${({ theme }) => theme.media.desktop} {
+    grid-template-columns: 2fr 3fr;
+    grid-template-rows: auto auto;
+  }
+
+  ${({ theme }) => theme.media.hd} {
+    grid-template-columns: 3fr 7fr;
+    grid-template-rows: auto auto;
+    gap: 25px;
+  }
+`;
+
 const ErrorMessage = styled.div`
   margin-top: 10vh;
   text-align: center;
@@ -97,28 +142,35 @@ const ErrorMessage = styled.div`
   }
 `;
 
-const App: React.FC = () => {
-  const [searchedCityName, setSearchedCityName] = useState<string | null>('lublin');
-  const [cityCoords, setCityCoords] = useState({
-    city: 'lublin',
-    country: 'PL',
-    lon: 51,
-    lat: 23,
-  });
-  const [currentWeather, setCurrentWeather] = useState<ICurrentWeather | undefined>();
-  const [wind, setWind] = useState<IWind | undefined>();
-  const [air, setAir] = useState<IAir | undefined>();
-  const [temperatureInfo, setTemperatureInfo] = useState<ITemperatureInfo | undefined>();
-  const [day, setDay] = useState<IAstronomicalData | undefined>();
+interface IProps {
+  searchedCityName: string;
+  cityCoords: ICityCoords;
+  setCityCoords: (coords: ICityCoords) => void;
+  setCurrentWeather: (currentWeather: ICurrentWeather) => void;
+  setWind: (wind: IWind) => void;
+  setAir: (air: IAir) => void;
+  setTemperatureInfo: (temperatureInfo: ITemperatureInfo) => void;
+  setAstronomicalData: (astronomicalData: IAstronomicalData) => void;
+}
 
+const App: React.FC<IProps> = ({
+  searchedCityName,
+  cityCoords,
+  setCityCoords,
+  setCurrentWeather,
+  setWind,
+  setAir,
+  setTemperatureInfo,
+  setAstronomicalData,
+}) => {
   const { data: weatherData, error, isSuccess, isLoading } = useQuery(
     ['weather', searchedCityName],
     () => fetchWeatherConditions(searchedCityName)
   );
-  const { data: airData, isSuccess: airFetchIsSuccess } = useQuery(['air', cityCoords], () =>
+  const { data: airData } = useQuery(['air', cityCoords], () =>
     fetchAirConditions(cityCoords)
   );
-  const { data: astroData, isSuccess: astroFetchIsSuccess } = useQuery(['astro', cityCoords], () =>
+  const { data: astroData } = useQuery(['astro', cityCoords], () =>
     fetchAstronomicalData(cityCoords)
   );
 
@@ -129,17 +181,14 @@ const App: React.FC = () => {
       setWind(weatherData?.wind);
       setTemperatureInfo(weatherData?.temperatureInfo);
     }
-  }, [weatherData]);
-
-  useEffect(() => {
-    if (airFetchIsSuccess) {
+    if (airData) {
       setAir(airData);
     }
 
-    if (astroFetchIsSuccess) {
-      setDay(astroData);
+    if (astroData) {
+      setAstronomicalData(astroData);
     }
-  }, [airData, astroData]);
+  }, [weatherData, airData, astroData]);
 
   const renderWeatherPanel = () => {
     if (isLoading) {
@@ -147,19 +196,16 @@ const App: React.FC = () => {
     }
 
     if (isSuccess) {
-      return currentWeather && air && wind && temperatureInfo && day ? (
-        <WeatherDetails
-          weather={currentWeather}
-          air={air}
-          wind={wind}
-          temperatureInfo={temperatureInfo}
-          day={day}
-        />
-      ) : null;
+      return (
+        <WeatherPanelGrid>
+          <CurrentWeather />
+          <WindConditions />
+          <OtherDetails />
+        </WeatherPanelGrid>
+      );
     }
 
     if (error) {
-      console.log(error);
       return (
         <ErrorMessage>
           <p>It seems that the given location doesn't exist...</p>
@@ -175,17 +221,27 @@ const App: React.FC = () => {
       <GlobalFonts />
       <Wrapper>
         <Header>Weather App</Header>
-        {currentWeather && cityCoords ? (
-          <SearchBar
-            setCityName={setSearchedCityName}
-            city={cityCoords.city}
-            country={cityCoords.country}
-          />
-        ) : null}
+        <SearchBar />
         {renderWeatherPanel()}
       </Wrapper>
     </ThemeProvider>
   );
 };
 
-export default App;
+const mapStateToProps = (state: AppState) => {
+  return {
+    searchedCityName: state.searchedCityName,
+    cityCoords: state.cityCoords,
+  };
+};
+
+const mapDispatchToProps = {
+  setCityCoords,
+  setCurrentWeather,
+  setWind,
+  setAir,
+  setTemperatureInfo,
+  setAstronomicalData,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

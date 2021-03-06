@@ -1,6 +1,8 @@
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { IAir } from '../../../interfaces';
+import { AppState } from '../../../store';
 
 const Container = styled.div`
   grid-area: air;
@@ -141,4 +143,19 @@ const AirDetails: React.FC<AirDetailsProps> = (props) => {
   );
 };
 
-export default AirDetails;
+const mapStateToProps = (state: AppState) => {
+  const { index, pm2_5, pm10, no2, so2, o3 } = state.air;
+
+  return {
+    air: {
+      index,
+      pm2_5,
+      pm10,
+      no2,
+      so2,
+      o3,
+    },
+  };
+};
+
+export default connect(mapStateToProps)(AirDetails);

@@ -1,6 +1,8 @@
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { ITemperatureInfo } from '../../../interfaces';
+import { AppState } from '../../../store';
 
 const Container = styled.div`
   grid-area: temp;
@@ -63,4 +65,16 @@ const TemperatureDetails: React.FC<TemperatureDetailsProps> = ({
   );
 };
 
-export default TemperatureDetails;
+const mapStateToProps = (state: AppState) => {
+  const { min, max, avg } = state.temperatureInfo;
+
+  return {
+    temperatureInfo: {
+      min,
+      max,
+      avg,
+    },
+  };
+};
+
+export default connect(mapStateToProps)(TemperatureDetails);

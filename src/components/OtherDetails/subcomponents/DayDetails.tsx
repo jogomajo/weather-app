@@ -1,7 +1,9 @@
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Sunny, Moon } from '@styled-icons/ionicons-solid';
 
 import { IAstronomicalData } from '../../../interfaces';
+import { AppState } from '../../../store';
 
 const Container = styled.div`
   grid-area: day;
@@ -93,10 +95,12 @@ const MoonIcon = styled(Moon)`
 `;
 
 interface DayDetailsProps {
-  day: IAstronomicalData;
+  astronomicalData: IAstronomicalData;
 }
 
-const DayDetails: React.FC<DayDetailsProps> = ({ day: { sunrise, sunset, moonrise, moonset } }) => {
+const DayDetails: React.FC<DayDetailsProps> = ({
+  astronomicalData: { sunrise, sunset, moonrise, moonset },
+}) => {
   return (
     <Container>
       <div>
@@ -123,4 +127,17 @@ const DayDetails: React.FC<DayDetailsProps> = ({ day: { sunrise, sunset, moonris
   );
 };
 
-export default DayDetails;
+const mapStateToProps = (state: AppState) => {
+  const { sunrise, sunset, moonrise, moonset } = state.astronomicalData;
+
+  return {
+    astronomicalData: {
+      sunrise,
+      sunset,
+      moonrise,
+      moonset,
+    },
+  };
+};
+
+export default connect(mapStateToProps)(DayDetails);

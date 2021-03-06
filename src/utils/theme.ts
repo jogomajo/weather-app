@@ -24,14 +24,3 @@ const theme = {
 };
 
 export default theme;
-
-// --xiketic: #03071eff;
-// --dark-sienna: #370617ff;
-// --rosewood: #6a040fff;
-// --dark-red: #9d0208ff;
-// --rosso-corsa: #d00000ff;
-// --vermilion: #dc2f02ff;
-// --persimmon: #e85d04ff;
-// --carrot-orange: #f48c06ff;
-// --orange-web: #faa307ff;
-// --selective-yellow: #ffba08ff;

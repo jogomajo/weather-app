@@ -1,6 +1,10 @@
 import { useRef } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import { Location } from '@styled-icons/ionicons-solid';
+
+import { AppState } from '../../store';
+import { setCityName } from '../../store/actions';
 
 const Bar = styled.div`
   display: flex;
@@ -122,7 +126,7 @@ const Button = styled.button`
 `;
 
 interface IProps {
-  setCityName: (name: string | null) => void;
+  setCityName: (name: string) => void;
   city: string;
   country: string;
 }
@@ -152,4 +156,15 @@ const SearchBar: React.FC<IProps> = ({ setCityName, city, country }) => {
   );
 };
 
-export default SearchBar;
+const mapStateToProps = (state: AppState) => {
+  return {
+    city: state.cityCoords.city,
+    country: state.cityCoords.country,
+  };
+};
+
+const mapDispatchToProps = {
+  setCityName,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

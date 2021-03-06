@@ -17,7 +17,7 @@ interface IWeatherConditions {
   temperatureInfo: ITemperatureInfo;
 }
 
-const evaluateDirection = (degrees: number) => {
+const evaluateWindDirection = (degrees: number) => {
   const directions = ['↑ N', '↗ NE', '→ E', '↘ SE', '↓ S', '↙ SW', '← W', '↖ NW'];
   const value = Math.floor(degrees / 45);
 
@@ -49,7 +49,7 @@ export const fetchWeatherConditions = async (city: string | null): Promise<IWeat
 
   const wind: IWind = {
     speed: Math.round(weatherData.wind.speed),
-    direction: evaluateDirection(weatherData.wind.deg),
+    direction: evaluateWindDirection(weatherData.wind.deg),
     degree: weatherData.wind.deg,
   };
 
